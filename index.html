@@ -152,17 +152,6 @@
         <div class="section-title">选择地图应用打开</div>
 
         <div class="map-buttons">
-            <a class="map-btn" id="link-wechat-miniapp" href="#">
-                <div class="map-btn-icon"
-                    style="background: linear-gradient(135deg, #3EB575 0%, #2CA062 100%); display: flex; align-items: center; justify-content: center;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                        <path
-                            d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.045c.134 0 .24-.11.24-.245 0-.06-.023-.12-.038-.177l-.327-1.233a.49.49 0 0 1 .177-.554C23.026 18.595 24 16.874 24 14.936c0-3.385-3.274-6.12-7.062-6.078zm-2.036 2.851c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z" />
-                    </svg>
-                </div>
-                <span class="map-btn-name">腾讯地图小程序</span>
-                <span class="map-btn-arrow">›</span>
-            </a>
             <a class="map-btn" id="link-tencent" href="#" target="_blank">
                 <img class="map-btn-icon"
                     src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b8/33/01/b83301d7-6087-5940-9a5a-2bf9537c1707/AppIcon-1x_U007emarketing-0-11-0-0-85-220-0.png/540x540bb.webp"
@@ -194,11 +183,6 @@
         const addr = '广东省中山市民兴路三巷与民兴路二巷交叉口正北方向55米左右';
 
         // 设置跳转链接
-        // 腾讯地图小程序 - 使用微信明文URL Scheme跳转小程序
-        // 腾讯地图小程序 AppID: wxbb8a5dcb3c3a7703
-        const miniappPath = 'pages/index/index';
-        const miniappQuery = `type=marker&latitude=${lat}&longitude=${lng}&name=${encodeURIComponent(name)}&address=${encodeURIComponent(addr)}`;
-        document.getElementById('link-wechat-miniapp').href = `weixin://dl/business/?appid=wxbb8a5dcb3c3a7703&path=${encodeURIComponent(miniappPath)}&query=${encodeURIComponent(miniappQuery)}`;
         document.getElementById('link-tencent').href = `https://apis.map.qq.com/uri/v1/marker?marker=coord:${lat},${lng};title:${encodeURIComponent(name)};addr:${encodeURIComponent(addr)}`;
         document.getElementById('link-gaode').href = `https://uri.amap.com/marker?position=${lng},${lat}&name=${encodeURIComponent(name)}&coordinate=gaode&callnative=1`;
         document.getElementById('link-baidu').href = `https://api.map.baidu.com/marker?location=${lat},${lng}&title=${encodeURIComponent(name)}&content=${encodeURIComponent(addr)}&output=html&coord_type=gcj02`;
