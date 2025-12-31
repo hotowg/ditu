@@ -152,6 +152,17 @@
         <div class="section-title">选择地图应用打开</div>
 
         <div class="map-buttons">
+            <a class="map-btn" id="link-wechat" href="#">
+                <div class="map-btn-icon"
+                    style="background: #07C160; display: flex; align-items: center; justify-content: center;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                        <path
+                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                </div>
+                <span class="map-btn-name">微信内置定位</span>
+                <span class="map-btn-arrow">›</span>
+            </a>
             <a class="map-btn" id="link-tencent" href="#" target="_blank">
                 <img class="map-btn-icon"
                     src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b8/33/01/b83301d7-6087-5940-9a5a-2bf9537c1707/AppIcon-1x_U007emarketing-0-11-0-0-85-220-0.png/540x540bb.webp"
@@ -183,6 +194,8 @@
         const addr = '广东省中山市民兴路三巷与民兴路二巷交叉口正北方向55米左右';
 
         // 设置跳转链接
+        // 微信内置定位 - 使用腾讯地图URI方案，微信浏览器会自动调起内置地图
+        document.getElementById('link-wechat').href = `https://apis.map.qq.com/uri/v1/marker?marker=coord:${lat},${lng};title:${encodeURIComponent(name)};addr:${encodeURIComponent(addr)}&referer=wechat_location`;
         document.getElementById('link-tencent').href = `https://apis.map.qq.com/uri/v1/marker?marker=coord:${lat},${lng};title:${encodeURIComponent(name)};addr:${encodeURIComponent(addr)}`;
         document.getElementById('link-gaode').href = `https://uri.amap.com/marker?position=${lng},${lat}&name=${encodeURIComponent(name)}&coordinate=gaode&callnative=1`;
         document.getElementById('link-baidu').href = `https://api.map.baidu.com/marker?location=${lat},${lng}&title=${encodeURIComponent(name)}&content=${encodeURIComponent(addr)}&output=html&coord_type=gcj02`;
