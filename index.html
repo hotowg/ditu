@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>位置分享 - 幸福家园</title>
+    <script charset="utf-8" src="https://map.qq.com/api/gljs?v=1.exp&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+            background: #ededed;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #07C160;
+            color: white;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .header-title {
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 12px;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        #map-container {
+            height: 200px;
+            width: 100%;
+        }
+
+        .location-info {
+            padding: 16px;
+        }
+
+        .location-name {
+            font-size: 17px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 8px;
+        }
+
+        .location-addr {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .location-coord {
+            font-size: 12px;
+            color: #999;
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+        }
+
+        .section-title {
+            font-size: 14px;
+            color: #888;
+            padding: 8px 4px 12px;
+        }
+
+        .map-buttons {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .map-btn {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: #333;
+            border-bottom: 0.5px solid #e5e5e5;
+            transition: background 0.15s;
+        }
+
+        .map-btn:last-child {
+            border-bottom: none;
+        }
+
+        .map-btn:active {
+            background: #f5f5f5;
+        }
+
+        .map-btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            margin-right: 12px;
+        }
+
+        .map-btn-name {
+            flex: 1;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .map-btn-arrow {
+            color: #c7c7cc;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <svg class="header-icon" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="white" />
+            <circle cx="12" cy="9" r="2.5" fill="#07C160" />
+        </svg>
+        <span class="header-title">位置分享</span>
+    </div>
+
+    <div class="content">
+        <div class="location-card">
+            <div id="map-container"></div>
+            <div class="location-info">
+                <div class="location-name">幸福家园</div>
+                <div class="location-addr">广东省中山市民兴路三巷与民兴路二巷交叉口正北方向55米左右</div>
+                <div class="location-coord">22.639476, 113.291705</div>
+            </div>
+        </div>
+
+        <div class="section-title">选择地图应用打开</div>
+
+        <div class="map-buttons">
+            <a class="map-btn" id="link-tencent" href="#" target="_blank">
+                <img class="map-btn-icon"
+                    src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b8/33/01/b83301d7-6087-5940-9a5a-2bf9537c1707/AppIcon-1x_U007emarketing-0-11-0-0-85-220-0.png/540x540bb.webp"
+                    alt="腾讯地图">
+                <span class="map-btn-name">腾讯地图</span>
+                <span class="map-btn-arrow">›</span>
+            </a>
+            <a class="map-btn" id="link-gaode" href="#" target="_blank">
+                <img class="map-btn-icon"
+                    src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d8/3d/88/d83d8801-24bf-d12d-3cf0-fdc54363361f/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/540x540bb.webp"
+                    alt="高德地图">
+                <span class="map-btn-name">高德地图</span>
+                <span class="map-btn-arrow">›</span>
+            </a>
+            <a class="map-btn" id="link-baidu" href="#" target="_blank">
+                <img class="map-btn-icon"
+                    src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d5/52/90/d55290a1-22ed-6be1-7f3d-b1f95fafd1c0/appIconLiquid-0-0-1x_U007epad-0-1-0-0-sRGB-85-220.png/540x540bb.webp"
+                    alt="百度地图">
+                <span class="map-btn-name">百度地图</span>
+                <span class="map-btn-arrow">›</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const lat = 22.639476;
+        const lng = 113.291705;
+        const name = '幸福家园';
+        const addr = '广东省中山市民兴路三巷与民兴路二巷交叉口正北方向55米左右';
+
+        // 设置跳转链接
+        document.getElementById('link-tencent').href = `https://apis.map.qq.com/uri/v1/marker?marker=coord:${lat},${lng};title:${encodeURIComponent(name)};addr:${encodeURIComponent(addr)}`;
+        document.getElementById('link-gaode').href = `https://uri.amap.com/marker?position=${lng},${lat}&name=${encodeURIComponent(name)}&coordinate=gaode&callnative=1`;
+        document.getElementById('link-baidu').href = `https://api.map.baidu.com/marker?location=${lat},${lng}&title=${encodeURIComponent(name)}&content=${encodeURIComponent(addr)}&output=html&coord_type=gcj02`;
+
+        // 初始化腾讯地图
+        function initMap() {
+            const center = new TMap.LatLng(lat, lng);
+            const map = new TMap.Map('map-container', {
+                center: center,
+                zoom: 16,
+                draggable: false,
+                scrollable: false,
+                doubleClickZoom: false,
+                showControl: false
+            });
+
+            // 添加标记点
+            new TMap.MultiMarker({
+                map: map,
+                styles: {
+                    marker: new TMap.MarkerStyle({
+                        width: 28,
+                        height: 40,
+                        anchor: { x: 14, y: 40 },
+                        color: '#07C160'
+                    })
+                },
+                geometries: [{
+                    id: 'location',
+                    position: center
+                }]
+            });
+        }
+
+        // 等待API加载完成
+        window.onload = initMap;
+    </script>
+</body>
+
+</html>
